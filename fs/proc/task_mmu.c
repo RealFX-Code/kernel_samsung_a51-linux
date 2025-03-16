@@ -24,7 +24,6 @@
 #include <asm/tlb.h>
 #include <asm/tlbflush.h>
 #include "internal.h"
-#include <ctype.h>
 
 void task_mem(struct seq_file *m, struct mm_struct *mm)
 {
@@ -1772,7 +1771,7 @@ static ssize_t reclaim_write(struct file *file, const char __user *buf,
 		type = RECLAIM_ANON;
 	else if (!strcmp(type_buf, "all"))
 		type = RECLAIM_ALL;
-	else if (isdigit(*type_buf))
+	else if (type_buf[0] >= '0' && type_buf[0] <= '9')
 		type = RECLAIM_RANGE;
 	else
 		goto out_err;
